@@ -66,7 +66,7 @@ namespace AtomTest.UserComparison
             {
                 Console.WriteLine("Неверный формат номера паспорта.");
                 return;
-            }
+            } 
             user2.PassportNumber = passportNumber2;
 
             Console.Write("Введите дату рождения (ДД ММ ГГГГ через пробел): ");
