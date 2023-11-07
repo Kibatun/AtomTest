@@ -1,5 +1,9 @@
 ﻿class Filtration
 {
+    /// <summary>
+    /// Точка входа в программу.
+    /// </summary>
+    /// <param name="args">Аргументы командной строки (не используются).</param>
     static void Main(string[] args)
     {
         List<User> users = GetSampleUsers();
@@ -26,6 +30,10 @@
         }
     }
 
+    /// <summary>
+    /// Получить примеры пользователей.
+    /// </summary>
+    /// <returns>Список примеров пользователей.</returns>
     static List<User> GetSampleUsers()
     {
         List<User> users = new List<User>
@@ -38,6 +46,13 @@
         return users;
     }
 
+    /// <summary>
+    /// Фильтрация списка пользователей по заданным критериям.
+    /// </summary>
+    /// <param name="users">Список пользователей для фильтрации.</param>
+    /// <param name="filterField">Поле, по которому осуществляется фильтрация.</param>
+    /// <param name="filterValue">Значение, по которому осуществляется фильтрация.</param>
+    /// <returns>Список отфильтрованных пользователей.</returns>
     static IEnumerable<User> FilterUsers(List<User> users, string filterField, string filterValue)
     {
         switch (filterField)
@@ -65,19 +80,21 @@
                 return Enumerable.Empty<User>();
         }
     }
+
     /// <summary>
-    /// 
+    /// Нормализует ввод пользователя, приводя его к стандартному виду.
     /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
+    /// <param name="input">Входная строка, которую необходимо нормализовать.</param>
+    /// <returns>Стандартизированное значение поля для фильтрации или "Ошибка" в случае неправильного ввода.</returns>
     static string NormalizeFilterField(string input)
     {
+        // Приведем ввод пользователя к стандартному виду
         string normalizedField = input.Trim().ToLower();
         if (normalizedField == "фамилия") return "Фамилия";
         if (normalizedField == "имя") return "Имя";
         if (normalizedField == "отчество") return "Отчество";
         if (normalizedField == "серия и номер паспорта") return "Серия и номер паспорта";
         if (normalizedField == "дд-мм-гг") return "ДД-ММ-ГГ";
-        return "Ошибка";
+        return "Ошибка"; // Вернем "Ошибка" в случае неправильного ввода
     }
 }
