@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AtomTest.UserComparison
 {
-    public class Program
+    public class ComparisonLogic
     {
-        public static void Main(string[] args)
+        public static void Compare(string[] args)
         {
             Console.WriteLine("Введите данные первого пользователя (ФИО через пробел):");
 
