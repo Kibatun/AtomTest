@@ -12,7 +12,7 @@ namespace AtomTest.UserComparison
         {
             User userOne = ReadUserInput("первого пользователя");
             User userTwo = ReadUserInput("второго пользователя");
-
+             
             if (userOne.IsIdentical(userTwo))
             {
                 Console.WriteLine("Пользователи идентичны.");
