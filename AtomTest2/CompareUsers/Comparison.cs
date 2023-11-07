@@ -4,6 +4,10 @@ namespace AtomTest.UserComparison
 {
     public class ComparisonLogic
     {
+        /// <summary>
+        /// Метод для сравнения двух пользователей и вывода результата.
+        /// </summary>
+        /// <param name="args">Аргументы командной строки (не используются).</param>
         public static void Compare(string[] args)
         {
             User userOne = ReadUserInput("первого пользователя");
@@ -19,6 +23,11 @@ namespace AtomTest.UserComparison
             }
         }
 
+        /// <summary>
+        /// Метод для ввода данных пользователя и валидации входных данных.
+        /// </summary>
+        /// <param name="userDescription">Описание пользователя (первого или второго).</param>
+        /// <returns>Объект User с введенными данными.</returns>
         private static User ReadUserInput(string userDescription)
         {
             Console.WriteLine($"Введите данные {userDescription} (ФИО через пробел):");
@@ -52,6 +61,12 @@ namespace AtomTest.UserComparison
             return user;
         }
 
+        /// <summary>
+        /// Метод для ввода строки с валидацией, повторяющий ввод до ввода корректных данных.
+        /// </summary>
+        /// <param name="errorMessage">Сообщение об ошибке для вывода при некорректных данных.</param>
+        /// <param name="validator">Функция валидации введенных данных.</param>
+        /// <returns>Введенная и проверенная строка.</returns>
         private static string ReadLineWithValidation(string errorMessage, Func<string, bool> validator)
         {
             string input;
@@ -66,11 +81,21 @@ namespace AtomTest.UserComparison
             return input;
         }
 
+        /// <summary>
+        /// Метод для валидации ФИО.
+        /// </summary>
+        /// <param name="input">Введенная строка для валидации.</param>
+        /// <returns>True, если введенное значение соответствует формату ФИО, иначе False.</returns>
         private static bool ValidateFullName(string input)
         {
             return Regex.IsMatch(input, @"^\S+\s+\S+\s+\S+$");
         }
 
+        /// <summary>
+        /// Метод для валидации даты рождения.
+        /// </summary>
+        /// <param name="input">Введенная строка для валидации.</param>
+        /// <returns>True, если введенное значение соответствует формату ДД ММ ГГГГ и является корректной датой, иначе False.</returns>
         private static bool ValidateDate(string input)
         {
             string[] parts = input.Split(' ');
