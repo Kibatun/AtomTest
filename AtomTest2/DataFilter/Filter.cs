@@ -2,16 +2,11 @@
 {
     static void Main(string[] args)
     {
-        List<User> users = new List<User>
-        {
-            new User { SurName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", PassportNumber = "1234567890", DateOfBirth = new DateTime(1985, 2, 1) },
-            new User { SurName = "Петров", FirstName = "Петр", Patronymic = "Петрович", PassportNumber = "9876543210", DateOfBirth = new DateTime(1990, 4, 15) },
-            // Добавьте других пользователей по вашему усмотрению
-        };
+        List<User> users = GetSampleUsers();
 
         Console.WriteLine("Введите поле для фильтрации (Фамилия, Имя, Отчество, Серия и номер паспорта, ДД-ММ-ГГ):");
         string filterField = Console.ReadLine();
-        string filterFieldNormalized = NormalizeFilterField(filterField); // Преобразуем ввод пользователя в стандартизированное поле
+        string filterFieldNormalized = NormalizeFilterField(filterField);
 
         if (filterFieldNormalized == "Ошибка")
         {
@@ -29,6 +24,18 @@
         {
             Console.WriteLine($"{user.SurName} {user.FirstName} {user.Patronymic}, {user.PassportNumber}, {user.DateOfBirth:dd-MM-yyyy}");
         }
+    }
+
+    static List<User> GetSampleUsers()
+    {
+        List<User> users = new List<User>
+        {
+            new User { SurName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", PassportNumber = "1234567890", DateOfBirth = new DateTime(1985, 2, 1) },
+            new User { SurName = "Петров", FirstName = "Петр", Patronymic = "Петрович", PassportNumber = "9876543210", DateOfBirth = new DateTime(1990, 4, 15) },
+            // Добавьте других пользователей по вашему усмотрению
+        };
+
+        return users;
     }
 
     static IEnumerable<User> FilterUsers(List<User> users, string filterField, string filterValue)
@@ -58,21 +65,19 @@
                 return Enumerable.Empty<User>();
         }
     }
-
     /// <summary>
-    /// Нормализует ввод пользователя, приводя его к стандартному виду.
+    /// 
     /// </summary>
-    /// <param name="input">Входная строка, которую необходимо нормализовать.</param>
-    /// <returns>Стандартизированное значение поля для фильтрации или "Ошибка" в случае неправильного ввода.</returns>
+    /// <param name="input"></param>
+    /// <returns></returns>
     static string NormalizeFilterField(string input)
     {
-        // Приведем ввод пользователя к стандартному виду
         string normalizedField = input.Trim().ToLower();
         if (normalizedField == "фамилия") return "Фамилия";
         if (normalizedField == "имя") return "Имя";
         if (normalizedField == "отчество") return "Отчество";
         if (normalizedField == "серия и номер паспорта") return "Серия и номер паспорта";
         if (normalizedField == "дд-мм-гг") return "ДД-ММ-ГГ";
-        return "Ошибка"; // Вернем "Ошибка" в случае неправильного ввода
+        return "Ошибка";
     }
 }
